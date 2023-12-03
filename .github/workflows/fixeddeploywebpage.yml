@@ -3,22 +3,22 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main  # Modify to match your main branch name
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Deploy to GitHub Pages
+      - name: Build Your Website  # Modify this step as needed
         run: |
-          git checkout main
-          cp -r * /github/workspace
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push origin main:gh-pages
+          # Add commands to build your website (e.g., npm run build, jekyll build, etc.)
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ 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 }}
+          publish_dir: ./path/to/your/website  # Modify this to point to your built website
