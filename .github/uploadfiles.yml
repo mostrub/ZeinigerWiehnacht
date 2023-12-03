@@ -1,0 +1,35 @@
+
+name: Upload Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and deploy
+        env:
+          TOKEN: ${{ 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 }}
+        run: |
+          # Add your build commands here to generate the pages
+          # For example, if you're using Jekyll:
+          # bundle install
+          # bundle exec jekyll build
+
+          # Upload the generated files to GitHub Pages
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout gh-pages
+          git rm -rf .
+          cp -R <path_to_generated_files>/* .
+          git add .
+          git commit -m "Update pages"
+          git push origin gh-pages
+
